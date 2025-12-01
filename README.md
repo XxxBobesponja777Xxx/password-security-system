@@ -2,7 +2,7 @@
 
 Sistema completo de gestión de contraseñas con arquitectura de microservicios, validación avanzada, autenticación JWT, comunicación gRPC y notificaciones por Telegram.
 
-## 🏗️ Arquitectura
+## Arquitectura
 
 El proyecto consta de 5 componentes principales:
 
@@ -34,7 +34,7 @@ El proyecto consta de 5 componentes principales:
                                    └─────────────┘
 ```
 
-## 🚀 Requisitos Previos
+## Requisitos Previos
 
 - Docker Desktop instalado
 - Docker Compose
@@ -142,7 +142,7 @@ docker-compose down
 docker-compose logs -f
 ```
 
-## 🌐 Acceso a los Servicios
+## Acceso a los Servicios
 
 Una vez iniciados los servicios, accede a:
 
@@ -209,7 +209,7 @@ Al iniciar, se crea un usuario admin:
 Servicio `PasswordService`:
 - `ValidatePassword` - Validar contraseña según políticas
 
-## 🔒 Validaciones de Contraseña
+## Validaciones de Contraseña
 
 Las contraseñas deben cumplir:
 
@@ -222,7 +222,7 @@ Las contraseñas deben cumplir:
 7. ✅ No ser similar a la contraseña anterior (>80% similitud)
 8. ✅ No contener el email del usuario
 
-## 🛡️ Seguridad
+## Seguridad
 
 - **Hashing**: bcrypt con 12 salt rounds
 - **JWT**: Tokens firmados con expiración de 1 hora
@@ -230,7 +230,7 @@ Las contraseñas deben cumplir:
 - **Validación**: Sistema multicapa de validación de contraseñas
 - **Historial**: Las contraseñas antiguas se guardan para evitar reutilización
 
-## 🔧 Desarrollo Local
+## Desarrollo Local
 
 ### Instalar dependencias
 
@@ -259,7 +259,7 @@ cd s1
 npm start
 ```
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 password-security-system/
@@ -304,7 +304,7 @@ password-security-system/
 └── README.md
 ```
 
-## 🧪 Testing
+## Testing
 
 Ejemplos de pruebas con curl:
 
@@ -326,38 +326,16 @@ curl -k -X POST https://localhost:3001/users/me/change-password \
   }'
 ```
 
-## 🚨 Tolerancia a Fallos
+## Tolerancia a Fallos
 
 - **S2**: Mantiene caché de políticas. Si S3 está caído, usa la última política en caché
 - **S1**: Maneja fallos de S2/S3 con mensajes de error apropiados (HTTP 503)
 - **Health Checks**: Todos los servicios exponen `/health`
 
-## 📧 Notificaciones
+## Notificaciones
 
 El sistema envía notificaciones por Telegram cuando:
 - La contraseña expira en 7 días o menos
 - El usuario consulta el estado de su contraseña
 
-## 🤝 Contribución
 
-1. Fork el proyecto
-2. Crea una rama (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## 📝 Licencia
-
-Este proyecto es de código abierto y está disponible bajo la Licencia MIT.
-
-## 👥 Autores
-
-Proyecto educativo para demostración de arquitectura de microservicios con Node.js.
-
-## 🙏 Agradecimientos
-
-- Express.js
-- MongoDB
-- gRPC
-- Docker
-- Telegram Bot API
