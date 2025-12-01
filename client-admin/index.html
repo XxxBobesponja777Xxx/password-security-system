@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Sistema de Contraseñas</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen active">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                </div>
+                <h1>Panel de Administración</h1>
+                <p class="subtitle">Sistema de Gestión de Contraseñas</p>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="admin@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="password" required placeholder="••••••••">
+                    </div>
+                    
+                    <div id="login-error" class="error-message"></div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <span>Iniciar Sesión</span>
+                        <div class="spinner" style="display: none;"></div>
+                    </button>
+                </form>
+                
+                <div class="footer-links">
+                    <a href="../user/">Portal de Usuario</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="dashboard-screen" class="screen">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>🔐 Panel de Administración</h1>
+                </div>
+                <div class="header-right">
+                    <span id="admin-email" class="admin-email"></span>
+                    <button id="logout-btn" class="btn btn-secondary">Cerrar Sesión</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tabs">
+            <button class="tab active" data-tab="users">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                Usuarios
+            </button>
+            <button class="tab" data-tab="policies">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                Políticas
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Users Tab -->
+            <div id="users-tab" class="tab-content active">
+                <div class="content-header">
+                    <h2>Gestión de Usuarios</h2>
+                    <button id="add-user-btn" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Nuevo Usuario
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table id="users-table">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Último Cambio</th>
+                                <th>Expira</th>
+                                <th>Días Restantes</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-tbody">
+                            <tr>
+                                <td colspan="6" class="loading">Cargando usuarios...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Policies Tab -->
+            <div id="policies-tab" class="tab-content">
+                <div class="content-header">
+                    <h2>Políticas de Contraseñas</h2>
+                    <button id="add-policy-btn" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Nueva Política
+                    </button>
+                </div>
+
+                <div id="active-policy-card" class="policy-card">
+                    <h3>📋 Política Activa</h3>
+                    <div id="active-policy-content" class="loading">Cargando política activa...</div>
+                </div>
+
+                <div class="table-container">
+                    <table id="policies-table">
+                        <thead>
+                            <tr>
+                                <th>Descripción</th>
+                                <th>Longitud Mín.</th>
+                                <th>Mayúsculas</th>
+                                <th>Minúsculas</th>
+                                <th>Dígitos</th>
+                                <th>Símbolos</th>
+                                <th>Días Máx.</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="policies-tbody">
+                            <tr>
+                                <td colspan="9" class="loading">Cargando políticas...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Add/Edit User -->
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="user-modal-title">Nuevo Usuario</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="user-form">
+                <div class="form-group">
+                    <label for="user-email">Email *</label>
+                    <input type="email" id="user-email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="user-role">Rol *</label>
+                    <select id="user-role" name="role" required>
+                        <option value="user">Usuario</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" id="user-password-group">
+                    <label for="user-password">Contraseña *</label>
+                    <input type="password" id="user-password" name="password">
+                    <small>Mínimo 15 caracteres, incluye mayúsculas, minúsculas, dígitos y símbolos</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="user-telegram">Chat ID de Telegram (opcional)</label>
+                    <input type="text" id="user-telegram" name="telegramChatId" placeholder="123456789">
+                </div>
+                
+                <div id="user-form-error" class="error-message"></div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary cancel-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span>Guardar</span>
+                        <div class="spinner" style="display: none;"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Add/Edit Policy -->
+    <div id="policy-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="policy-modal-title">Nueva Política</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="policy-form">
+                <div class="form-group">
+                    <label for="policy-description">Descripción</label>
+                    <input type="text" id="policy-description" name="description" placeholder="Política de seguridad estándar">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="policy-minLength">Longitud Mínima *</label>
+                        <input type="number" id="policy-minLength" name="minLength" value="15" min="8" max="128" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="policy-maxDays">Días Máx. de Vigencia *</label>
+                        <input type="number" id="policy-maxDays" name="maxPasswordAgeDays" value="90" min="1" max="365" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="policy-uppercase" name="requireUppercase" checked>
+                        <span>Requiere Mayúsculas</span>
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="policy-lowercase" name="requireLowercase" checked>
+                        <span>Requiere Minúsculas</span>
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="policy-digits" name="requireDigits" checked>
+                        <span>Requiere Dígitos</span>
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="policy-symbols" name="requireSymbols" checked>
+                        <span>Requiere Símbolos</span>
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="policy-active" name="isActive">
+                        <span>Activar esta política</span>
+                    </label>
+                </div>
+                
+                <div id="policy-form-error" class="error-message"></div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary cancel-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span>Guardar</span>
+                        <div class="spinner" style="display: none;"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/users.js"></script>
+    <script src="js/policies.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

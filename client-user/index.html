@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Usuario - Sistema de Contraseñas</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen active">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <h1>Portal de Usuario</h1>
+                <p class="subtitle">Gestiona tu contraseña de forma segura</p>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="usuario@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="password" required placeholder="••••••••">
+                    </div>
+                    
+                    <div id="login-error" class="error-message"></div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <span>Iniciar Sesión</span>
+                        <div class="spinner" style="display: none;"></div>
+                    </button>
+                </form>
+                
+                <div class="footer-links">
+                    <a href="../admin/">Panel de Administración</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="dashboard-screen" class="screen">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>👤 Mi Cuenta</h1>
+                </div>
+                <div class="header-right">
+                    <span id="user-email" class="user-email"></span>
+                    <button id="logout-btn" class="btn btn-secondary">Cerrar Sesión</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Welcome Card -->
+            <div class="welcome-card">
+                <h2>Bienvenido/a</h2>
+                <p>Mantén tu cuenta segura actualizando tu contraseña regularmente</p>
+            </div>
+
+            <!-- Password Status Card -->
+            <div class="status-card" id="status-card">
+                <div class="status-icon">🔒</div>
+                <h3>Estado de tu Contraseña</h3>
+                <div id="status-content" class="loading">Cargando...</div>
+            </div>
+
+            <!-- Change Password Card -->
+            <div class="change-password-card">
+                <h3>🔑 Cambiar Contraseña</h3>
+                <p class="card-subtitle">Tu contraseña debe cumplir con los siguientes requisitos:</p>
+                
+                <div class="requirements-list">
+                    <div class="requirement">✓ Mínimo 15 caracteres</div>
+                    <div class="requirement">✓ Al menos una mayúscula (A-Z)</div>
+                    <div class="requirement">✓ Al menos una minúscula (a-z)</div>
+                    <div class="requirement">✓ Al menos un dígito (0-9)</div>
+                    <div class="requirement">✓ Al menos un símbolo (!@#$%...)</div>
+                    <div class="requirement">✓ No debe ser una contraseña común</div>
+                    <div class="requirement">✓ No debe contener tu email</div>
+                </div>
+
+                <form id="change-password-form">
+                    <div class="form-group">
+                        <label for="current-password">Contraseña Actual *</label>
+                        <input type="password" id="current-password" name="currentPassword" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="new-password">Nueva Contraseña *</label>
+                        <input type="password" id="new-password" name="newPassword" required>
+                        <div class="password-strength" id="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-bar-fill" id="strength-bar-fill"></div>
+                            </div>
+                            <div class="strength-text" id="strength-text"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmar Nueva Contraseña *</label>
+                        <input type="password" id="confirm-password" name="confirmPassword" required>
+                    </div>
+                    
+                    <div id="change-password-error" class="error-message"></div>
+                    <div id="change-password-success" class="success-message"></div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <span>Cambiar Contraseña</span>
+                        <div class="spinner" style="display: none;"></div>
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/password.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
