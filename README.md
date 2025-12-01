@@ -41,7 +41,7 @@ El proyecto consta de 5 componentes principales:
 - Node.js 18+ (para desarrollo local)
 - Un bot de Telegram (opcional, para notificaciones)
 
-## 📋 Configuración Inicial
+## Configuración Inicial
 
 ### 1. Clonar el repositorio
 
@@ -109,7 +109,7 @@ openssl req -x509 -newkey rsa:4096 -keyout certs/server.key -out certs/server.cr
    https://api.telegram.org/bot<TU_TOKEN>/getUpdates
    ```
 
-## 🐳 Ejecución con Docker
+## Ejecución con Docker
 
 ### Iniciar todos los servicios
 
@@ -159,7 +159,7 @@ Al iniciar, se crea un usuario admin:
 - **Email**: admin@example.com
 - **Password**: Admin123!@#Secure
 
-## 📚 API Endpoints
+## API Endpoints
 
 ### S1 - Servidor Principal (HTTPS)
 
@@ -337,5 +337,6 @@ curl -k -X POST https://localhost:3001/users/me/change-password \
 El sistema envía notificaciones por Telegram cuando:
 - La contraseña expira en 7 días o menos
 - El usuario consulta el estado de su contraseña
+
 
 
